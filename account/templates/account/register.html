@@ -1,0 +1,138 @@
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<style type="text/css">
+  .form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+  }
+
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-signin .input-group input[type="password"] {
+    margin-bottom: -1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .h3{
+    text-align: center;
+  }
+  .card {
+    width: 100%;
+    max-width: 28em;
+    padding: 15px;
+    margin: auto;
+    height: auto;
+    }
+
+</style>
+
+
+
+
+
+<div class="card text-center col-lg-4 border-info shadow-lg p-3 mb-5 bg-body rounded">
+	<div class="card-header font-weight-bold text-success border-success h1">
+	  Register an account
+	</div>
+	<div class="card-body">
+	  <h5 class="card-title">
+		<form class="form-signin shadow p-3 mb-5 bg-body rounded" method="post">{% csrf_token %}
+		  <!--Username-->
+			<div class="input-group input-group-lg">
+			  <span class="input-group-text" id="inputGroup-sizing-lg">
+				  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+					  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+				  </svg>
+			  </span>
+			  <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required>
+			  </div>
+		  <br>
+		  <!--Email-->
+		  <div class="input-group input-group-lg">
+			  <span class="input-group-text" id="inputGroup-sizing-lg">
+				  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+					  <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+				  </svg>
+			  </span>
+			  <input type="email" name="email" id="inputEmail" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Email Address" required autofocus>
+		  </div>
+		  <br>
+		  <!--Password field-->
+			<div class="input-group input-group-lg">
+			  <span class="input-group-text" id="inputGroup-sizing-lg">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+					<path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+				  </svg>
+			  </span>
+			  <input type="password" name="password1" id="inputPassword1" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Password" required>
+			  </div>
+			  <br>
+		  <!--Confirm password field-->
+			<div class="input-group input-group-lg">
+			  <span class="input-group-text" id="inputGroup-sizing-lg">
+				  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+					  <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+				  </svg>
+			  </span>
+			  <input type="password" name="password2" id="inputPassword2" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Confirm password" required>
+		  </div>
+		  
+			{% for field in registration_form %}
+				<p>
+				  {% for error in field.errors %}
+					<p style="color: red">{{ error }}</p>
+				  {% endfor %}
+				</p>
+			{% endfor %}
+			{% if registration_form.non_field_errors %}
+			  <div style="color: red">
+				<p>{{registration_form.non_field_errors}}</p>
+			  </div>
+				
+			{% endif %}
+			<br>
+			<button class="btn btn-lg btn-primary btn-block rounded" type="submit">Register</button>
+		  
+		  </form>
+	  </h5>
+	  <p>
+        <span class="h5 bg-light text-dark">Already have an account? <a class="btn btn-outline-dark rounded-pill shadow-lg" href="{% url 'login' %}">Login Here</a></span> 
+    </p> 
+	  
+	</div>
+  
+  </div>
+
+
+
+
+{% endblock content %}
+
+	
+

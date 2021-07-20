@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<style type="text/css">
+ 
+ 
+  .h3{
+    text-align: center;
+  }
+
+  .blog-posts{
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+  }
+  .input-group {
+      width: 10em;
+  }
+ 
+  .row {
+      display: table-row;
+  }
+table.table td {
+  border-bottom: 1px solid rgb(88, 88, 86);
+  padding: 10px; font-size: 2em;
+  text-align: left;
+}
+table.table th {
+  height: 2em;
+  text-align: left;
+  padding: 1em;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.subcard{
+  font-family: cursive;
+}
+</style>
+{% if blog_posts %}
+<div style="margin-inline: auto; margin-top: 0em; text-align:center; width: 75%; font-size: 1.5em; margin-bottom: 2px;" class="subcard card">
+    <div class="card-body">
+      YOUR SUBMITTED ARTICLES
+    </div>
+  </div> 
+  <table style="margin-inline: auto; width: 75%; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" class="table bg-light border-info rounded shadow-lg p-3 mb-5 bg-body rounded">
+    <thead class="thead h4 shadow p-3 mb-5 bg-body rounded">
+        <tr class="row p-2 rounded-pill">
+            <th class="col-7 mt-1">Articles</th>
+            <th class="col-3">Edit</th>
+            <th class="col-2">Delete</th>
+        </tr>
+    </thead> 
+    <tbody >
+      {% for post in blog_posts %}
+                <tr class="row" >
+                    <td class="col-7"><a href="{% url 'blog:detail' post.slug %}" class="text-dark h5" style="text-decoration: none;">{{post}}</a></td>
+                    <td class="col-3">
+                        <a href="{% url 'blog:edit' post.slug %}" id="inputGroup-sizing-default" class="input-group-text" style="width: max-content;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg></a>
+                    </td>
+                    <td class="col-2">
+                      <a href="{% url 'blog:delete' post.slug %}" id="inputGroup-sizing-default" class="input-group-text" style="width: max-content;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                          <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                        </svg></a></td>
+                </tr>
+        {% endfor %}
+        {% else %}
+          <p style="text-align: center; margin" class="h5 text-dark">You have no Artciles posted yet. Create an article <a href="{% url 'blog:create' %}">here</a>.</p>
+    {% endif %}
+
+  </tbody>
+</table>
+
+
+{% endblock content %}

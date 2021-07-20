@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  {% include 'snippets/header.html' %}
+  <style>
+    .p-0 {
+      background-color:rgb(162, 216, 162);
+      padding-top: 0%; 
+    }
+
+  </style>
+  </head>
+  <body class="p-0 mb-2 ">
+    <style type="text/css">
+      .main{
+        min-height: 100vh;
+        height: 100%;
+      }
+    </style>
+    <div class="main">
+      {% block content %}
+
+      {% endblock content %}
+    </div>
+  
+    
+
+    
+    {% include 'snippets/footer.html' %}  
+  </body>
+</html>

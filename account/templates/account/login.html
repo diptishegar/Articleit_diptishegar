@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style type="text/css">
+  .form-signin {
+    width: 100%;
+    max-width: 30em;
+    padding: 15px;
+    margin: auto;
+    }
+
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 1em;
+    font-size: 16px;
+  }
+  .form-signin .form-control:focus{
+    z-index: 2;
+  }
+  .form-signin .input-group input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-signin .pass input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .h3  {
+    text-align: center;
+  }
+  .card {
+    width: 100%;
+    max-width: 27em;
+    padding: 15px;
+    margin: auto;
+    height: auto;
+    }
+  .forgot {
+    height: 2em;
+  }
+</style>
+
+
+<div class="card text-center col-lg-4 border-info shadow-lg p-3 mb-5 bg-body rounded">
+  <div class="card-header font-weight-bold text-success border-success h1">
+    Login
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">
+      <form class="form-signin shadow p-3 mb-2 bg-body rounded" method="post">{% csrf_token %}
+
+      
+        <div class="input-group input-group-lg">
+          <span class="input-group-text" id="inputGroup-sizing-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+              <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            </svg>
+          </span>
+          <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" required autofocus>
+        </div>
+        <br>
+        <div class="input-group input-group-lg">
+          <span class="input-group-text" id="inputGroup-sizing-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+              <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+            </svg>
+          </span>
+          <input type="password" name="password" id="inputPassword" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Password" required>
+			  </div>
+        {% for field in login_form %}
+            <p>
+              {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+              {% endfor %}
+            </p>
+        {% endfor %}
+        {% if login_form.non_field_errors %}
+          <div style="color: red">
+            <p>{{login_form.non_field_errors}}</p>
+          </div>
+            
+        {% endif %}<br>
+        <button class="btn btn-lg btn-primary btn-block shadow-lg p-2 mb-2 bg-body rounded" type="submit">Sign In</button>
+      
+      </form><div class="forgot d-flex justify-content-end mb-2 p-2">
+      <a class="h5 font-italic text-info font-weight-normal margin-auto" href="{% url 'password_reset' %}">Forgot password?</a> 
+    </div>
+    </h5>
+    <p>
+      <span class="h6 bg-light font-weight-bold text-success">Don't have an account yet? <a class="btn btn-outline-dark rounded-pill shadow-lg" href="{% url 'register' %}">Create one</a></span> 
+  </p>
+    
+  </div>
+
+</div>
+
+
+
+{% endblock content %}
+	
+
