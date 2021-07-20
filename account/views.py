@@ -23,7 +23,7 @@ def registration_view(request):
 	return render(request, 'account/register.html',context)
 
 def extra(request):
-	return render(request, "account/extra.html", {})
+	return redirect('blog:dashboard')
 
 def logout_view(request):
 	logout(request)
